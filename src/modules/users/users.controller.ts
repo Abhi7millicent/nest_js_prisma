@@ -18,20 +18,20 @@ export class CreateItemDto {
 @Controller('users')
 export class UserController {
   @Post()
-  @UseInterceptors(
-    FileInterceptor('file', {
-      storage: diskStorage({
-        destination: './src/uploads',
-        filename: (req, file, cb) => {
-          const filename: string = path
-            .parse(file.originalname)
-            .name.replace(/\s/g, '');
-          const extension: string = path.parse(file.originalname).ext;
-          cb(null, `${filename}${extension}`);
-        },
-      }),
-    }),
-  )
+  // @UseInterceptors(
+  //   FileInterceptor('file', {
+  //     storage: diskStorage({
+  //       destination: './src/uploads',
+  //       filename: (req, file, cb) => {
+  //         const filename: string = path
+  //           .parse(file.originalname)
+  //           .name.replace(/\s/g, '');
+  //         const extension: string = path.parse(file.originalname).ext;
+  //         cb(null, `${filename}${extension}`);
+  //       },
+  //     }),
+  //   }),
+  // )
   async CreateUser(
     @Body() createItemDto: CreateItemDto,
     @UploadedFile() file: Express.Multer.File,
