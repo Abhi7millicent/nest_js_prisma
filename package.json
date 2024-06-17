@@ -15,7 +15,7 @@
     "build:testing": "cross-env NODE_ENV=testing nest build",
     "build:prod": "npx prisma init && npx prisma db pull --schema=./src/database/prisma/schema.prisma && npx prisma generate --schema=./src/database/prisma/schema.prisma && cross-env NODE_ENV=production nest build",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "postinstall": "npx prisma init && npx prisma db pull --schema=./src/database/prisma/schema.prisma && npx prisma generate --schema=./src/database/prisma/schema.prisma",
+    "postinstall": "npm install --save --save-exact prisma && npx prisma init && npx prisma db pull --schema=./src/database/prisma/schema.prisma && npx prisma generate --schema=./src/database/prisma/schema.prisma",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
