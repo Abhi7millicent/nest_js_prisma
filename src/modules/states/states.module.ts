@@ -16,7 +16,7 @@ import { StatesController } from './states.controller';
 import { PrismaClient } from '@prisma/client';
 import StoredProcedureRepository from 'src/core/repository/stored-procedure-repository';
 import { PrismaModule } from 'src/database/prisma.module';
-import { StateRepository } from './state.repository';
+import StateRepository from './state.repository';
 
 @Module({
   imports: [PrismaModule],

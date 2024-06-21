@@ -6,12 +6,12 @@
 //   await app.listen(3000);
 // }
 // bootstrap();
-
+import './bootstrap';
 import { VersioningType } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { setupRedoc } from './core/middleware/redoc.middleware';
+import { setupRedoc } from './core/middlewares/redoc.middleware';
 import * as dotenv from 'dotenv';
 
 async function bootstrap() {

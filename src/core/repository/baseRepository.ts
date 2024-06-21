@@ -142,7 +142,7 @@ const BaseRepository = <
       if (!includeSoftDeleted) {
         (where as Record<string, any>).is_deleted = false;
       }
-
+      console.log('model:', modelName);
       // @ts-ignore
       return AbstractBaseRepository.model.findFirst({
         // @ts-ignore
@@ -150,6 +150,20 @@ const BaseRepository = <
         ..._.omit(option, ['includeDeleted']), // Remove includeDeleted from options
       }) as Promise<Return | null>;
     }
+
+    // public static async findOne1<Option extends Find<Select, Include, Cursor, Order, Scalar> & { includeDeleted?: boolean; }, Args extends Option & { where?: Where }, Return extends ModelTypes<Args>[T]['Return']>(conditions: Where | number | string, option: Option = {} as Option) {
+    //   const where = Object.assign({}, extractCondition(conditions, modelName));
+    //   const includeSoftDeleted = option.includeDeleted || false;
+
+    //   if (!includeSoftDeleted) {
+    //     (where as Record<string, any>).is_deleted = false;
+    //   }
+
+    //   return this.model.findFirst({
+    //     where,
+    //     ..._.omit(option, ['includeDeleted']),
+    //   }) as Promise<Return | null>;
+    // }
 
     /**
      * Alternative of `findOne`.\
@@ -259,53 +273,53 @@ const BaseRepository = <
  * @param option 
  * @returns statuscode, message .
  */
-    public static async softDelete<
-      Option extends BaseOption<Include, Select>,
-      Payload extends Update,
-      Args extends Option & { data: Payload },
-      Return extends ModelTypes<Args>[T]['Return'],
-      Include = any,
-      Select = any,
-    >(
-      modelName: ModelName,
-      conditions: Where | number | string,
-      additionalData: Partial<Payload> = {},
-      option: Option = {} as Option,
-    ): Promise<Return> {
-      const where = extractCondition(conditions, modelName);
+    // public static async softDelete<
+    //   Option extends BaseOption<Include, Select>,
+    //   Payload extends Update,
+    //   Args extends Option & { data: Payload },
+    //   Return extends ModelTypes<Args>[T]['Return'],
+    //   Include = any,
+    //   Select = any,
+    // >(
+    //   modelName: ModelName,
+    //   conditions: Where | number | string,
+    //   additionalData: Partial<Payload> = {},
+    //   option: Option = {} as Option,
+    // ): Promise<Return> {
+    //   const where = extractCondition(conditions, modelName);
 
-      // Dynamically build the update data based on the model's fields
-      const updateData: {
-        is_deleted: true;
-        modified_on?: Date;
-        modified_by?: string;
-      } = {
-        is_deleted: true,
-      };
+    //   // Dynamically build the update data based on the model's fields
+    //   const updateData: {
+    //     is_deleted: true;
+    //     modified_on?: Date;
+    //     modified_by?: string;
+    //   } = {
+    //     is_deleted: true,
+    //   };
 
-      if ('modified_on' in additionalData) {
-        updateData.modified_on = new Date();
-      }
+    //   if ('modified_on' in additionalData) {
+    //     updateData.modified_on = new Date();
+    //   }
 
-      if (
-        'modified_by' in additionalData &&
-        typeof additionalData.modified_by === 'string'
-      ) {
-        updateData.modified_by = additionalData.modified_by;
-      }
+    //   if (
+    //     'modified_by' in additionalData &&
+    //     typeof additionalData.modified_by === 'string'
+    //   ) {
+    //     updateData.modified_by = additionalData.modified_by;
+    //   }
 
-      // Access the model dynamically
-      const model = models[modelName];
-      if (!model) {
-        throw new Error(`Model ${modelName} not found in models object`);
-      }
+    //   // Access the model dynamically
+    //   const model = models[modelName];
+    //   if (!model) {
+    //     throw new Error(`Model ${modelName} not found in models object`);
+    //   }
 
-      return model.update({
-        data: { ...updateData, ...additionalData },
-        where,
-        ...option,
-      }) as Promise<Return>;
-    }
+    //   return model.update({
+    //     data: { ...updateData, ...additionalData },
+    //     where,
+    //     ...option,
+    //   }) as Promise<Return>;
+    // }
 
     /**
      * Delete any `model` that match with the conditions.

@@ -7,6 +7,7 @@ import { CityModule } from './city/city.module';
 import { CountryModule } from './country/country.module';
 
 import { UsersModule } from './user/user.module';
+import { UserLoginModule } from './user-login/user-login.module';
 
 export const Modules = [
   AuthModule,
@@ -14,4 +15,5 @@ export const Modules = [
   StatesModule,
   CityModule,
   CountryModule,
+  UserLoginModule,
 ];

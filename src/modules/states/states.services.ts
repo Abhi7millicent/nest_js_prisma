@@ -2,8 +2,8 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { State } from 'src/models/class.transformer.ts/state';
 import StoredProcedureRepository from 'src/core/repository/stored-procedure-repository';
-import { StateRepository } from './state.repository';
 import { ApplyTransformInterceptorToMethod } from 'src/core/decorator/dto.transform.decorator';
+import StateRepository from './state.repository';
 
 @Injectable()
 export class StateService {
@@ -168,12 +168,12 @@ export class StateService {
       throw new BadRequestException('Invalid state id');
     }
 
-    await StateRepository.softDelete('state', stateId);
+    // await StateRepository.softDelete('state', stateId);
     return {};
   }
 
   async date() {
-    return this.stateRepo.getDate();
+    // return this.stateRepo.getDate();
   }
   @ApplyTransformInterceptorToMethod(State)
   async getAllSP(): Promise<State[]> {

@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { CreateCountryDto, UpdateCountryDto } from './country.DTO';
-import { CountryRepository } from './country.repository';
+import CountryRepository from './country.repository';
 
 @Injectable()
 export class CountryService {
@@ -59,7 +59,7 @@ export class CountryService {
       throw new BadRequestException('Invalid state id');
     }
 
-    await CountryRepository.softDelete('country', countryId);
+    // await CountryRepository.softDelete('country', countryId);
     return {};
   }
 
